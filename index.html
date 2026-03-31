@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Chin's Snack</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe4ed 100%);
+            color: #5e2a3e;
+            scroll-behavior: smooth;
+        }
+
+        /* Warna pink tema */
+        :root {
+            --pink-soft: #ffb7c5;
+            --pink-mid: #ff8da1;
+            --pink-dark: #d94f6f;
+            --pink-pale: #fff0f3;
+            --coral: #ff6b8b;
+            --cream: #fff9fb;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 245, 248, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            box-shadow: 0 4px 20px rgba(217, 79, 111, 0.1);
+            border-bottom: 1px solid rgba(255, 141, 161, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Dancing Script', cursive;
+            color: var(--pink-dark);
+            text-shadow: 2px 2px 8px rgba(255, 141, 161, 0.3);
+        }
+
+        .logo span {
+            color: var(--coral);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #7a3e52;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink-dark);
+            transform: translateY(-2px);
+            display: inline-block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--pink-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 24px;
+            color: #a04e6b;
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, var(--pink-mid), var(--pink-dark));
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 6px 14px rgba(217, 79, 111, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-pink:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(217, 79, 111, 0.4);
+            background: linear-gradient(135deg, var(--pink-dark), #c23b5a);
+        }
+
+        .btn-outline-pink {
+            background: transparent;
+            border: 2px solid var(--pink-dark);
+            color: var(--pink-dark);
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-outline-pink:hover {
+            background: var(--pink-dark);
+            color: white;
+        }
+
+        /* Featured / Produk */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--pink-dark);
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--pink-mid);
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(217, 79, 111, 0.12);
+            transition: 0.3s;
+            text-align: center;
+            padding-bottom: 20px;
+            border: 1px solid rgba(255, 141, 161, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 32px rgba(217, 79, 111, 0.2);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #ffeef3;
+        }
+
+        .product-card h3 {
+            margin: 16px 0 8px;
+            color: var(--pink-dark);
+            font-size: 1.4rem;
+        }
+
+        .price {
+            color: var(--coral);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 8px 0;
+        }
+
+        .product-card p {
+            padding: 0 16px;
+            color: #7a5a68;
+        }
+
+        /* Tentang Kami */
+        .about {
+            background: var(--cream);
+            border-radius: 48px;
+            margin: 20px auto;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--pink-dark);
+            margin-bottom: 16px;
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .about-img {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-img img {
+            max-width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+            background: #ffdae3;
+        }
+
+        /* Galeri */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background: #ffe2eb;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Testimoni */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .testi-card {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #ffccd6;
+        }
+
+        .testi-card i {
+            font-size: 2.2rem;
+            color: var(--pink-mid);
+            margin-bottom: 12px;
+        }
+
+        .testi-card p {
+            font-style: italic;
+            margin: 12px 0;
+            color: #5e3e4b;
+        }
+
+        .customer {
+            font-weight: 700;
+            color: var(--pink-dark);
+        }
+
+        /* Kontak */
+        .contact {
+            background: linear-gradient(120deg, #fff0f5, #ffe8ef);
+            border-radius: 48px;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--pink-dark);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .contact-detail i {
+            font-size: 1.6rem;
+            color: var(--coral);
+            width: 40px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .social-icons a {
+            background: var(--pink-mid);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: var(--pink-dark);
+            transform: scale(1.1);
+        }
+
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 28px;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ffc0cd;
+            border-radius: 48px;
+            font-family: 'Quicksand', sans-serif;
+            background: #fffafc;
+            transition: 0.2s;
+        }
+
+        .form-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--pink-dark);
+            box-shadow: 0 0 0 3px rgba(217, 79, 111, 0.2);
+        }
+
+        button[type="submit"] {
+            background: var(--pink-dark);
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 48px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: #bc3f5b;
+        }
+
+        /* Footer */
+        footer {
+            background: #fddae4;
+            text-align: center;
+            padding: 28px 0;
+            margin-top: 40px;
+            color: #9b5b73;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                gap: 24px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container nav-container">
+        <div class="logo">Chin's<span>Snack</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container hero-content">
+        <h1>✨ Chin's Snack ✨</h1>
+        <p>“Chin’s Snack hadir untuk melengkapi harimu dengan camilan dan makanan pilihan yang dibuat dengan rasa dan kualitas terbaik. Karena setiap momen spesial pantas ditemani rasa yang istimewa.”</p>
+        <a href="#produk" class="btn-pink">Belanja Sekarang</a>
+        <a href="#kontak" class="btn-outline-pink" style="margin-left: 16px;">Hubungi Kami</a>
+    </div>
+</section>
+
+<!-- Tentang Kami -->
+<section id="tentang" class="section about">
+    <div class="container about-content">
+        <div class="about-text">
+            <h3>💖 Tentang Chin's Snack</h3>
+            <p>Chin's Snack lahir dari kecintaan terhadap rasa dan kualitas terbaik. Chin's Snack merupakan UMKM lokal yang fokus menghadirkan produk handmade dengan sentuhan rasa yang menyenangkan.</p>
+            <p>Setiap produk dibuat dengan penuh perhatian, dari bahan berkualitas, dikemas cantik, dan siap menemani momen spesialmu. Yuk, dukung produk lokal Chin's Snack!</p>
+            <a href="#produk" class="btn-pink" style="display: inline-block; margin-top: 16px;">Lihat Koleksi</a>
+        </div>
+        <div class="about-img">
+            <img src="pp.png" alt="Tentang Kami">
+        </div>
+    </div>
+</section>
+
+<!-- Produk Unggulan -->
+<section id="produk" class="section">
+    <div class="container">
+        <h2 class="section-title">🌸 Produk Favorit 🌸</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="ak1.png" alt="Ayam Kemangi" class="product-img">
+                <h3>Ayam Kemangi</h3>
+                <p class="price">Rp 35.000/160gr</p>
+                <p class="price">Rp 70.000/400gr</p>
+                <p>Ayam Kemangi yang dimasak dengan kaya akan bumbu rempah-rempah. Disetiap gigitannya akan berasa daging yang lembut dan ketika dilahap dengan nasi yang hangat akan menambah sensasi untuk menambah porsi makan.</p>
+            </div>
+            <div class="product-card">
+                <img src="sbu.png" alt="Buket Pink" class="product-img">
+                <h3>Salad Buah</h3>
+                <p class="price">Rp 25.000/250gr</p>
+                <p class="price">Rp 45.000/400gr</p>
+                <p>Dibuat dari buah-buahan segar berkualitas, salad buah Chin’s Snack menghadirkan rasa alami yang dipadukan dengan saus creamy spesial, memberikan sensasi segar, manis, dan memanjakan lidah.</p>
+            </div>
+            <div class="product-card">
+                <img src="pk.png" alt="Tas Rajut" class="product-img">
+                <h3>Pisang Keju</h3>
+                <p class="price">Rp 20.000</p>
+                <p>Pisang yang dimasak dengan balutan tepung yang gurih dan kriuk dengan ditimpali oleh gula palm, susu dan parutan keju. Cocok buat menemani cemal cemil mu disetiap harinya.</p>
+            </div>
+            <div class="product-card">
+                <img src="hm.png" alt="Macaron" class="product-img">
+                <h3>Hampres</h3>
+                <p class="price">Rp 150.000</p>
+                <p>Sebuah hampers yang didesain kekinian sehingga cocok sekali untuk sebuah bingkisan walaupun simpel dan murah tetapi terlihat mewah. Beri ini pada orang terkasih dikarenakan cemilah yang ada dihampers ini tidak akan mengecewakan. Untuk isian bisa custom</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kontak -->
+<section id="kontak" class="section contact">
+    <div class="container contact-wrapper">
+        <div class="contact-info">
+            <h3>📞 Hubungi Kami</h3>
+            <p>Senin - Sabtu | 09.00 - 17.00 WIB</p>
+            <div class="contact-detail">
+                <i class="fab fa-whatsapp"></i>
+                <span>+62 81233746955</span>
+            </div>
+            <div class="contact-detail">
+                <i class="fas fa-envelope"></i>
+                <span>@clipasik1408@gmail.com</span>
+            </div>
+            <div class="contact-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Siwatu, Bumiroso, Kab. Wonosobo, Jawa Tengah</span>
+            </div>
+        </div>
+        <div class="contact-form">
+            <h3 style="margin-bottom: 20px; color: #d94f6f;">Kirim Pesan 💌</h3>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email / No. HP" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="3" placeholder="Pesan / Pesanan kamu..."></textarea>
+                </div>
+                <button type="submit">Kirim Sekarang</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>✨💖 Chin's Snack 💖✨</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">&copy; 2025 UMKM Chin's Snack. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
